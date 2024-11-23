@@ -5,8 +5,10 @@ const productSchema = mongoose.Schema({
     name: String,
     price: Number,
     stock: Number,
-    Type: String,
-    data: Array
+    type: String,
+    gender: String,
+    author: String,
+    description: String,
 })
 
 const Product = mongoose.model("Product", productSchema)
