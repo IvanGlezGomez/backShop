@@ -39,13 +39,19 @@ router.get("/:productId", async (req, res) => {
     }
 })
 
-get.post("/", async (req, res) => {
+router.post("/create", async (req, res) => {
     try {
         const newProduct = new Product({...req.body})
+        console.log(req.body)
         await newProduct.save()
+        res.json({newProduct})
 
     } catch (error) {
-        res.status(500).json({message: "Error to get the prodructs"})
+        res.status(500).json(
+        {
+            message: "Error to send the prodructs",
+            err: error
+        })
     }
 })
 
