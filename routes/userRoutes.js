@@ -39,6 +39,20 @@ router.get("/search", async (req, res) => {
     }
 })
 
+router.get("/type", async (req, res) => {
+    const query = req.query.query
+    if (!query){
+        return res.status(400).json({message: 'Parametro de busqueda vacio'})
+    }
+    try {
+        const regex = new RegExp(query, 'i')
+        const products = await Product.find({gender: {$regex: regex}})
+        res.status(200).json(products)
+    } catch (error) {
+        res.status(500).json({message: "Error to get the prodructs"})
+    }
+})
+
 router.get("/:productId", async (req, res) => {
     try {
         const _id = req.params.productId
